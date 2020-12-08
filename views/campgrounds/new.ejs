@@ -1,0 +1,50 @@
+<%- include("../partials/header.ejs") %>
+    <style type="text/css">
+        body {
+            background-color: whitesmoke;
+        }
+        
+        body>.grid {
+            height: 100%;
+        }
+        
+        .image {
+            margin-top: -100px;
+        }
+        
+        .column {
+            max-width: 450px;
+        }
+    </style>
+    <div class="ui middle aligned center aligned grid">
+        <div class="column">
+            <h2 class="ui blue image header">
+                <div class="content">
+                    <i style="color:yellow;" class="home large icon"></i> Create New Campground
+                </div>
+            </h2>
+            <form class="ui large form" action="/campgrounds" method="POST" enctype="multipart/form-data">
+                <div class="ui stacked segment">
+                    <div class="field">
+                        <input type="text" name="campground[name]" placeholder="Name">
+                    </div>
+                    <div class="field">
+                        <input type="number" name="campground[price]" placeholder="price" min="0.01" step="0.01">
+                    </div>
+                    <div class="field">
+                        <input type="file" id="image" name="image" accept="image/*" required>
+                    </div>
+                    <div class="field">
+                        <input type="text" name="campground[description]" placeholder="description">
+                    </div>
+                    <button class="ui fluid large blue button"> Submit</button>
+                </div>
+            </form>
+            <div class="ui message">
+                <a href="/campgrounds"> Go Back</a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+    <%- include("../partials/footer.ejs") %>

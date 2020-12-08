@@ -1,0 +1,84 @@
+<%- include("../partials/header.ejs") %>
+    <style>
+        #mapid {
+            height: 350px;
+        }
+    </style>
+    <div style="margin-bottom: 20px;"></div>
+    <div class="container">
+        <div class="ui equal width grid">
+            <div class="column">
+                <div id="mapid"></div>
+            </div>
+            <div class="twelve wide column">
+                <div class="ui piled segment" style="padding: 0em; margin-bottom: 0em;">
+                    <img class="ui fluid image" style="width: 100%; height: 500px;" src="<%=campground.image %>">
+                </div>
+                <div style="margin-top: 9px;" class="ui inverted segment">
+                    <h3 class="float-right ui sub header">$
+                        <%= campground.price %>/night</h3>
+                    <h2 class="ui header" style="margin-top: 0em;">
+                        <img class="ui circular image" src="<%= campground.image %>">
+                        <%= campground.name %>
+                    </h2>
+                    <h4 style="margin-bottom:0;">
+                        <%= campground.description %>
+                    </h4>
+                    <% if(currentUser && campground.author.id.equals(currentUser._id)){ %>
+                        <p style="display: inline;">
+                            <a style="margin-top: 1rem;" class="ui inverted orange basic button" href="/campgrounds/<%= campground._id %>/edit ">Edit</a>
+                        </p>
+                        <form style="display: inline; " action="/campgrounds/<%= campground._id %>/?_method=Delete" method="POST">
+                            <button class="ui inverted red basic button">Delete</button>
+                        </form>
+                        <% }%>
+                            <p class="text-right" style="padding-right: 9px; margin-bottom: 0em;">
+                                <em>Submitted by: <%= campground.author.username %> // <%= moment(campground.createdAt).fromNow() %></em>
+                            </p>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top:6rem;"></div>
+        <p class="floated right">
+            <a class="ui right floated purple button" href="/campgrounds/<%= campground._id %>/comments/new" role="button"><i class="fa fa-plus-circle"></i>   Add New comments</a>
+        </p>
+        <div style="margin-bottom: 8rem;" class="ui comments">
+            <h2 style="color: violet;" class="ui dividing header"><i class="comment outline icon"></i>Comments</h2>
+            <% campground.comments.forEach(function(comment){ %>
+                <div class="comment">
+                    <div class="content">
+                        <a class="author">
+                            <i style="color: steelblue;" class="user circle icon"></i>
+                            <%= comment.author.username %>
+                        </a>
+                        <div class="metadata">
+                            <span class="date"><span><%= moment(comment.createdAt).fromNow() %></span></span>
+                        </div>
+                        <div style="margin-bottom: 2rem;" class="text">
+                            <%= comment.text %>
+                        </div>
+                        <% if(currentUser && comment.author.id.equals(currentUser._id)){ %>
+                            <a style="margin-bottom: 1rem; margin-right: 8px; padding: 6px 7px 6px 7px;" class="ui basic orange tiny button" href="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>/edit"><i class="edit ouline icon"></i></a>
+                            <form style="display: inline;" action="/campgrounds/<%= campground._id %>/comments/<%= comment._id %>?_method=Delete" method="POST">
+                                <button style="margin-bottom: 1rem; padding: 7px 7px 7px 7px;" class="ui basic red tiny button"><i class="trash alternate outine icon"></i></button>
+                            </form>
+                            <% } %>
+                    </div>
+                </div>
+                <%}) %>
+        </div>
+
+        <script>
+            var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+
+            const attribution = '&copy; <a href="https://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+            const tileUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+            const tiles = L.tileLayer(tileUrl, {
+                attribution
+            });
+            tiles.addTo(mymap)
+        </script>
+    </div>
+
+
+    <%- include("../partials/footer.ejs") %>

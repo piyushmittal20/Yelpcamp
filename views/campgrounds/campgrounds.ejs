@@ -1,0 +1,51 @@
+<%- include("../partials/header.ejs") %>
+    <style>
+        .jumbotron {
+            background: rgb(0, 0, 0);
+        }
+    </style>
+    <div class="container">
+        <header style="margin-top: 1rem; color: white;" class="jumbotron">
+            <div>
+                <h1 class="display-3">
+                    <i style="color:yellow;" class="home icon"></i> Welcome To YelpCamp!!
+                </h1>
+                <p class="lead"> View our hand-picked campgrounds from all over the world</p>
+                <p>
+                    <a class="ui teal inverted basic large button" href="/campgrounds/new" role="button"><i class="plus icon"></i> Add New Campgrounds</a>
+                </p>
+            </div>
+        </header>
+
+        <div class="ui grid">
+            <div class="row" style="margin-left: 2px;">
+                <% campgrounds.forEach(function(campground) { %>
+                    <div class="four wide column" style="margin-bottom: 2rem;">
+                        <div class="ui card">
+                            <div class="image">
+                                <img src="<%=campground.image%>" class="ui centered samll image" class="img-fluid">
+                            </div>
+                            <div class="content">
+                                <a class="header">
+
+                                    <%= campground.name %>
+
+                                </a>
+                                <div class="extra content">
+                                    <p>
+                                        <a style="margin-top: 8px;" class="mini ui yellow basic button" href="/campgrounds/<%= campground._id %> " role="button"><i class="fa fa-info-circle"></i>  More Info</a>
+                                    </p>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                    <% }); %>
+            </div>
+        </div>
+    </div>
+
+    <%- include("../partials/footer.ejs") %>

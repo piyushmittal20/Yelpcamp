@@ -1,0 +1,38 @@
+form {
+    margin: 0 auto;
+    width: 420px;
+}
+
+.form-group {
+    padding: 15px 9px 7px 15px;
+    font-family: 'Bitter', serif;
+}
+
+.form-group label {
+    display: block;
+    margin: 0px 0px 10px 0px;
+    padding: 0px;
+    font-size: 25px;
+}
+
+.form-group input[type=text]:focus,
+.form-group input[type=password]:focus {
+    box-shadow: 0 0 8px #88D5E9;
+    border: 1px solid #88D5E9;
+    background-color: white;
+}
+
+#head {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.form-group input {
+    padding: 10px;
+    width: 400px;
+    box-sizing: border-box;
+}
+
+button {
+    width: 400px;
+}

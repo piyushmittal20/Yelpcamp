@@ -1,0 +1,49 @@
+<html>
+
+<head>
+    <title>YelpCamp</title>
+    <link href="https://fonts.googleapis.com/css?family=Arimo|Bitter&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script>
+</head>
+
+<body>
+    <div class="ui inverted menu">
+        <a class=" active item" href="/"><i style="color: yellow;" class="home icon"></i>Yelpcamp</a>
+        <a class="item" href="/campgrounds">Home</a>
+        <a class="item" href="/">Features</a>
+        <div class="right menu">
+            <% if(!currentUser){ %>
+                <div class="item">
+                    <a class="ui inverted green basic tiny button" href="/register"><i class="user plus icon"></i>  Sign Up</a>
+                </div>
+                <div class="item">
+                    <a class="ui inverted primary basic button" href="/login"><i class="user plus icon"></i>  Login</a>
+                </div>
+                <%  } else { %>
+                    <a class="item" href="#"><i class="user outline icon"></i>  Signed In As <%= currentUser.username %></a>
+                    <div class="item">
+                        <a class="ui inverted red basic button" href="/logout"> Logout</a>
+                    </div>
+                    <%   } %>
+        </div>
+    </div>
+    </div>
+
+    <div class="container" style="margin-top: 1rem;">
+        <% if(error && error.length > 0){  %>
+            <div class="alert alert-danger" role="alert">
+                <%= error %>
+            </div>
+            <% } %>
+    </div>
+    <div class="container" style="margin-top: 1rem;">
+        <% if(success && success.length > 0){  %>
+            <div class="alert alert-success" role="alert">
+                <%= success %>
+            </div>
+            <% } %>
+    </div>
